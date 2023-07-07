@@ -13,6 +13,7 @@ public class Main {
                 new Apple(155, "green"),
                 new Apple(120, "red"));
 
+        // 전략 패턴
         List<Apple> predicatedGreenApple = filterApples(inventory, new AppleGreenColorPredicate());
         System.out.println("predicatedGreenApple = " + predicatedGreenApple);
 
@@ -21,6 +22,24 @@ public class Main {
 
         List<Apple> predicatedHeavyWeightAndRedApple = filterApples(inventory, new AppleRedAndHeavyWeight());
         System.out.println("predicatedHeavyWeightAndRedApple = " + predicatedHeavyWeightAndRedApple);
+
+        // 익명 클래스
+        List<Apple> anonymousClass1 = filterApples(inventory, new ApplePredicate() {
+            @Override
+            public boolean test(Apple apple) {
+                return "red".equals(apple.getColor());
+            }
+        });
+
+        List<Apple> anonymousClass2 = filterApples(inventory, new ApplePredicate() {
+            @Override
+            public boolean test(Apple apple) {
+                return apple.getWeight() > 150;
+            }
+        });
+
+        System.out.println("anonymousClass1 = " + anonymousClass1);
+        System.out.println("anonymousClass2 = " + anonymousClass2);
     }
 
     private static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
