@@ -40,6 +40,10 @@ public class Main {
 
         System.out.println("anonymousClass1 = " + anonymousClass1);
         System.out.println("anonymousClass2 = " + anonymousClass2);
+
+        // 람다 표현식 사용
+        List<Apple> lambda = filterApples(inventory, (Apple a) -> "red".equals(a.getColor()));
+        System.out.println("lambda = " + lambda);
     }
 
     private static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
