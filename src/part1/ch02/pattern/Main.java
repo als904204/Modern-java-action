@@ -44,6 +44,14 @@ public class Main {
         // 람다 표현식 사용
         List<Apple> lambda = filterApples(inventory, (Apple a) -> "red".equals(a.getColor()));
         System.out.println("lambda = " + lambda);
+
+        // 리스트 형식으로 추상화
+        List<Apple> list = listFilter(inventory, (Apple apple) -> "red".equals(apple.getColor()));
+        System.out.println("list = " + list);
+
+        List<Integer> numbers = Arrays.asList(1, 2, 3,4,5,6);
+        List<Integer> evenNumbers = listFilter(numbers, (Integer i) -> i % 2 == 0);
+        System.out.println("evenNumbers = " + evenNumbers);
     }
 
     private static List<Apple> filterApples(List<Apple> inventory, ApplePredicate p) {
@@ -52,6 +60,21 @@ public class Main {
         for (Apple apple : inventory) {
             if (p.test(apple)) {
                 result.add(apple);
+            }
+        }
+        return result;
+    }
+
+    // 리스트 형식으로 추상화
+    private interface Predicate<T> {
+        boolean test(T t);
+    }
+
+    private static <T> List<T> listFilter(List<T> list, Predicate<T> predicate) {
+        List<T> result = new ArrayList<>();
+        for (T e : list) {
+            if (predicate.test(e)) {
+                result.add(e);
             }
         }
         return result;
